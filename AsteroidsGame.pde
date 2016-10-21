@@ -7,23 +7,37 @@ public void setup()
 }
 public void draw() 
 {
+    background(0);
     bob.show();
+    bob.move();
 }
 
-class SpaceShip extends Floater  
+public void keyTyped() {
+  if (key == 'h'){
+      bob.setDirectionX(0);
+      bob.setX(400);
+      bob.setY(400);
+
+  }
+}
+
+class Spaceship extends Floater  
 {  
  
   public Spaceship()
   {
-      corners = 6;  //the number of corners, a triangular floater has 3   
-      int[] xCorners = {16,7, 7, -8, -2, -8};   
-      int[] yCorners = {0,1, -1, 8, 0, -8 };   
-      myColor = ((int)Math.random()*200);   
+      corners = 4;  //the number of corners, a triangular floater has 3   
+      int[] allX = {-16,32,-16,-4};   
+      int[] allY = {-16,0,16,0}; 
+      xCorners  = allX;
+      yCorners = allY;
+      myColor = #506BAA;
+      myStroke = #6C85BE;    
       myCenterX = 450;
       myCenterY = 450; 
-      myDirectionX = 15;
-      myDirectionY = -30; //holds x and y coordinates of the vector for direction of travel   
-      myPointDirection = 30; //holds current direction the ship is pointing in degrees    
+      myDirectionX = 10;
+      myDirectionY = -10; //holds x and y coordinates of the vector for direction of travel   
+      myPointDirection = ((Math.random()*10)-10); //holds current direction the ship is pointing in degrees    
   }
    public void setX(int x){
       myCenterX = x;
@@ -67,6 +81,7 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
   protected int[] xCorners;   
   protected int[] yCorners;   
   protected int myColor;   
+  protected int myStroke;
   protected double myCenterX, myCenterY; //holds center coordinates   
   protected double myDirectionX, myDirectionY; //holds x and y coordinates of the vector for direction of travel   
   protected double myPointDirection; //holds current direction the ship is pointing in degrees    
@@ -122,7 +137,7 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
   public void show ()  //Draws the floater at the current position  
   {             
     fill(myColor);   
-    stroke(myColor);    
+    stroke(myStroke); 
     //convert degrees to radians for sin and cos         
     double dRadians = myPointDirection*(Math.PI/180);                 
     int xRotatedTranslated, yRotatedTranslated;    
