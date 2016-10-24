@@ -14,11 +14,12 @@ public void draw()
 
 public void keyTyped() {
   if (key == 'h'){
-      bob.setDirectionX(0);
-      bob.setX(400);
-      bob.setY(400);
-
+    
+      bob.setX((int)(Math.random()*900));
+      
+     bob.setY((int)(Math.random()*900));
   }
+ 
 }
 
 class Spaceship extends Floater  
@@ -35,8 +36,8 @@ class Spaceship extends Floater
       myStroke = #6C85BE;    
       myCenterX = 450;
       myCenterY = 450; 
-      myDirectionX = 10;
-      myDirectionY = -10; //holds x and y coordinates of the vector for direction of travel   
+      myDirectionX = 8;
+      myDirectionY = -8; //holds x and y coordinates of the vector for direction of travel   
       myPointDirection = ((Math.random()*10)-10); //holds current direction the ship is pointing in degrees    
   }
    public void setX(int x){
