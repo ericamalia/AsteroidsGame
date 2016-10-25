@@ -2,7 +2,7 @@
 Spaceship bob = new Spaceship();//your variable declarations here
 public void setup() 
 {
-  size(900,900);
+  size(950,950);
   //your code here
 }
 public void draw() 
@@ -14,12 +14,36 @@ public void draw()
 
 public void keyTyped() {
   if (key == 'h'){
-    
       bob.setX((int)(Math.random()*900));
-      
      bob.setY((int)(Math.random()*900));
   }
+  if (key == 'g'){
+    bob.setDirectionX(0);
+    bob.setDirectionY(0);
+  }
+ if (key == 'p'){
+    bob.rotate(30);
+ }
+ if (key == 'o'){
+    bob.rotate(-30);
+ }
+ if (key == 'b'){
+      bob.accelerate(1);
+      bob.myStroke = #00FFF5;
+      bob.lines();
+ }
  
+}
+
+class Stars {
+  protected int starX, starY;
+  protected int starColor;
+  public Stars(){
+    starX = ((int)(Math.random()*950)));
+    starY = ((int)(Math.random()*950)));
+    myColor = ((int)(Math.random()*100));
+  }
+
 }
 
 class Spaceship extends Floater  
@@ -28,16 +52,16 @@ class Spaceship extends Floater
   public Spaceship()
   {
       corners = 4;  //the number of corners, a triangular floater has 3   
-      int[] allX = {-16,32,-16,-4};   
-      int[] allY = {-16,0,16,0}; 
+      int[] allX = {-8,16,-8,-2};   
+      int[] allY = {-8,0,8,0}; 
       xCorners  = allX;
       yCorners = allY;
       myColor = #506BAA;
       myStroke = #6C85BE;    
       myCenterX = 450;
       myCenterY = 450; 
-      myDirectionX = 8;
-      myDirectionY = -8; //holds x and y coordinates of the vector for direction of travel   
+      myDirectionX = 3;
+      myDirectionY = -3; //holds x and y coordinates of the vector for direction of travel   
       myPointDirection = ((Math.random()*10)-10); //holds current direction the ship is pointing in degrees    
   }
    public void setX(int x){
@@ -152,5 +176,11 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
     }   
     endShape(CLOSE);  
   }   
+  public void lines ()
+  {
+    stroke(255);
+    line((int)myCenterX, (int)(myCenterY+2), (int)(myCenterX-25), (int)(myCenterY+2));
+    line((int)myCenterX, (int)(myCenterY-2), (int)(myCenterX-25), (int)(myCenterY-2));
+  }
 } 
 
