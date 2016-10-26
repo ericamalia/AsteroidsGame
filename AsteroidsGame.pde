@@ -1,21 +1,44 @@
 
-Spaceship bob = new Spaceship();//your variable declarations here
+Spaceship bob = new Spaceship();
+Stars[] sky = new Stars[300];
+Asteroid[] rock = new Asteroid[15];
+//your variable declarations here
 public void setup() 
 {
   size(950,950);
+  for (int i= 0; i < sky.length; i++)
+  {
+    sky[i] = new Stars();
+  }
+  for (int i=0; i< rock.length; i++){
+      rock[i] = new Asteroid();
+   }
   //your code here
 }
 public void draw() 
 {
     background(0);
+     for (int i= 0; i < sky.length; i++)
+     {
+      sky[i].show();
+     }
+     for (int i=0; i< rock.length; i++){
+        rock[i].show();
+        rock[i].move();
+     }
     bob.show();
     bob.move();
+   if (rock.getX() == bob.getX() || rock.getY() == bob.getY()){
+       bob.setDirectionX(0);
+      bob.setDirectionY(0);
+      text("OW");
+   }
 }
 
 public void keyTyped() {
   if (key == 'h'){
       bob.setX((int)(Math.random()*900));
-     bob.setY((int)(Math.random()*900));
+      bob.setY((int)(Math.random()*900));
   }
   if (key == 'g'){
     bob.setDirectionX(0);
@@ -39,11 +62,76 @@ class Stars {
   protected int starX, starY;
   protected int starColor;
   public Stars(){
-    starX = ((int)(Math.random()*950)));
-    starY = ((int)(Math.random()*950)));
-    myColor = ((int)(Math.random()*100));
+    starX = ((int)(Math.random()*950));
+    starY = ((int)(Math.random()*950));
+    starColor = ((int)(Math.random()*200));
+  }
+  public void show(){
+    noStroke();
+    fill(starColor);
+    ellipse(starX,starY,8,8);
+  }
+}
+
+
+class Asteroid extends Floater{
+   protected int spin;
+  public Asteroid(){
+      corners = 6;  //the number of corners, a triangular floater has 3   
+      int[] allX = {-8,8,12,8,-8,-12};   
+      int[] allY = {0,0,-8,-16,-16,-8}; 
+      xCorners  = allX;
+      yCorners = allY;
+      myColor = #CFCFAD;
+      myStroke =  #CFCFAD;    
+      myCenterX = ((int)(Math.random()*900));
+      myCenterY = ((int)(Math.random()*900)); 
+      myDirectionX = 0;
+      myDirectionY = 0; //holds x and y coordinates of the vector for direction of travel   
+      myPointDirection = ((Math.random()*10)-10); 
+      spin = ((int)(Math.random()*9)-2);
+  }
+  public void setX(int x){
+      myCenterX = x;
+   }
+   public int getX(){
+    return (int)myCenterX;
+   }
+   public void setY(int y)
+   {
+      myCenterY = y;
+   }
+    public int getY(){
+      return (int)myCenterY;
+    }
+   public void setDirectionX(double x){
+      myDirectionX = x;
+   }
+   public double getDirectionX(){
+      return (double)myDirectionX;
+   }
+   public void setDirectionY(double y)
+   {
+     myDirectionY = y;
+   }
+   public double getDirectionY()
+   {
+      return (double)myDirectionY;
+   }
+  public void setPointDirection(int degrees)
+  {
+    myPointDirection = degrees; 
+  }
+  public double getPointDirection()
+  {
+    return (double)myPointDirection;
   }
 
+
+
+  public void move() {
+    rotate(spin);
+  }
 }
 
 class Spaceship extends Floater  
@@ -62,7 +150,8 @@ class Spaceship extends Floater
       myCenterY = 450; 
       myDirectionX = 3;
       myDirectionY = -3; //holds x and y coordinates of the vector for direction of travel   
-      myPointDirection = ((Math.random()*10)-10); //holds current direction the ship is pointing in degrees    
+      myPointDirection = ((Math.random()*10)-10); 
+       //holds current direction the ship is pointing in degrees    
   }
    public void setX(int x){
       myCenterX = x;
@@ -176,11 +265,13 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
     }   
     endShape(CLOSE);  
   }   
+
   public void lines ()
   {
     stroke(255);
     line((int)myCenterX, (int)(myCenterY+2), (int)(myCenterX-25), (int)(myCenterY+2));
     line((int)myCenterX, (int)(myCenterY-2), (int)(myCenterX-25), (int)(myCenterY-2));
+    
   }
 } 
 
