@@ -1,6 +1,6 @@
 
 Spaceship bob = new Spaceship();
-Stars[] sky = new Stars[300];
+Stars[] sky = new Stars[400];
 Asteroid[] rock = new Asteroid[15];
 //your variable declarations here
 public void setup() 
@@ -28,11 +28,7 @@ public void draw()
      }
     bob.show();
     bob.move();
-   if (rock.getX() == bob.getX() || rock.getY() == bob.getY()){
-       bob.setDirectionX(0);
-      bob.setDirectionY(0);
-      text("OW");
-   }
+  
 }
 
 public void keyTyped() {
@@ -53,7 +49,7 @@ public void keyTyped() {
  if (key == 'b'){
       bob.accelerate(1);
       bob.myStroke = #00FFF5;
-      bob.lines();
+     
  }
  
 }
@@ -69,7 +65,7 @@ class Stars {
   public void show(){
     noStroke();
     fill(starColor);
-    ellipse(starX,starY,8,8);
+    ellipse(starX,starY,7,7);
   }
 }
 
@@ -131,6 +127,9 @@ class Asteroid extends Floater{
 
   public void move() {
     rotate(spin);
+    if (spin == 0){
+      spin = 1;
+    }
   }
 }
 
@@ -188,6 +187,28 @@ class Spaceship extends Floater
   {
     return (double)myPointDirection;
   }
+  public void show ()  //Draws the floater at the current position  
+  {             
+    fill(myColor);   
+    stroke(myStroke); 
+    //convert degrees to radians for sin and cos         
+    double dRadians = myPointDirection*(Math.PI/180);                 
+    int xRotatedTranslated, yRotatedTranslated;    
+    beginShape();         
+    for(int nI = 0; nI < corners; nI++)    
+    {     
+      //rotate and translate the coordinates of the floater using current direction 
+      xRotatedTranslated = (int)((xCorners[nI]* Math.cos(dRadians)) - (yCorners[nI] * Math.sin(dRadians))+myCenterX);     
+      yRotatedTranslated = (int)((xCorners[nI]* Math.sin(dRadians)) + (yCorners[nI] * Math.cos(dRadians))+myCenterY);      
+      vertex(xRotatedTranslated,yRotatedTranslated);  
+      stroke(255);
+       line((int)myCenterX, (int)(myCenterY+2), (int)(myCenterX-25), (int)(myCenterY+2));
+      line((int)myCenterX, (int)(myCenterY-2), (int)(myCenterX-25), (int)(myCenterY-2));
+    }   
+    
+    endShape(CLOSE);  
+  } 
+   
 }
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
 {   
@@ -266,12 +287,6 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
     endShape(CLOSE);  
   }   
 
-  public void lines ()
-  {
-    stroke(255);
-    line((int)myCenterX, (int)(myCenterY+2), (int)(myCenterX-25), (int)(myCenterY+2));
-    line((int)myCenterX, (int)(myCenterY-2), (int)(myCenterX-25), (int)(myCenterY-2));
-    
-  }
+ 
 } 
 
