@@ -28,7 +28,16 @@ public void draw()
      }
     bob.show();
     bob.move();
-  
+
+    for (int i=0; i<rock.length; i++){
+      if (dist(bob.getX(),bob.getY(), rock[i].getX(),rock[i].getY()) == 4){
+        bob.setDirectionX(0);
+        bob.setDirectionY(0);
+        stroke(#AD70EF);
+        textSize(20);
+        text("ow",450,450);
+      }
+  }
 }
 
 public void keyTyped() {
@@ -49,7 +58,7 @@ public void keyTyped() {
  if (key == 'b'){
       bob.accelerate(1);
       bob.myStroke = #00FFF5;
-     
+      bob.lines();
  }
  
 }
@@ -201,14 +210,18 @@ class Spaceship extends Floater
       xRotatedTranslated = (int)((xCorners[nI]* Math.cos(dRadians)) - (yCorners[nI] * Math.sin(dRadians))+myCenterX);     
       yRotatedTranslated = (int)((xCorners[nI]* Math.sin(dRadians)) + (yCorners[nI] * Math.cos(dRadians))+myCenterY);      
       vertex(xRotatedTranslated,yRotatedTranslated);  
-      stroke(255);
-       line((int)myCenterX, (int)(myCenterY+2), (int)(myCenterX-25), (int)(myCenterY+2));
-      line((int)myCenterX, (int)(myCenterY-2), (int)(myCenterX-25), (int)(myCenterY-2));
+    
     }   
     
     endShape(CLOSE);  
   } 
-   
+   public void lines ()
+  {
+    stroke(255);
+    line((int)myCenterX, (int)(myCenterY+2), (int)(myCenterX-25), (int)(myCenterY+2));
+    line((int)myCenterX, (int)(myCenterY-2), (int)(myCenterX-25), (int)(myCenterY-2));
+    
+  }  
 }
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
 {   
