@@ -30,12 +30,12 @@ public void draw()
     bob.move();
 
     for (int i=0; i<rock.length; i++){
-      if (dist(bob.getX(),bob.getY(), rock[i].getX(),rock[i].getY()) == 4){
+      if (dist(bob.getX(),bob.getY(), rock[i].getX(),rock[i].getY()) <= 10){
         bob.setDirectionX(0);
         bob.setDirectionY(0);
         stroke(#AD70EF);
-        textSize(20);
-        text("ow",450,450);
+        textSize(80);
+        text("ow",430,450);
       }
   }
 }
@@ -45,23 +45,31 @@ public void keyTyped() {
       bob.setX((int)(Math.random()*900));
       bob.setY((int)(Math.random()*900));
   }
-  if (key == 'g'){
+ else if (key == 'g'){
     bob.setDirectionX(0);
     bob.setDirectionY(0);
   }
- if (key == 'p'){
-    bob.rotate(30);
- }
- if (key == 'o'){
-    bob.rotate(-30);
- }
- if (key == 'b'){
+ 
+ else if (key == 'b'){
       bob.accelerate(1);
       bob.myStroke = #00FFF5;
       bob.lines();
  }
  
 }
+public void keyPressed(){
+  if (keyCode == RIGHT){
+    bob.rotate(30);
+     bob.setDirectionX(2);
+     bob.setDirectionY(2);
+
+ }
+ else if (keyCode == LEFT){
+    bob.rotate(-30);
+  
+}
+}
+
 
 class Stars {
   protected int starX, starY;
@@ -156,8 +164,8 @@ class Spaceship extends Floater
       myStroke = #6C85BE;    
       myCenterX = 450;
       myCenterY = 450; 
-      myDirectionX = 3;
-      myDirectionY = -3; //holds x and y coordinates of the vector for direction of travel   
+      myDirectionX = 2;
+      myDirectionY = -2; //holds x and y coordinates of the vector for direction of travel   
       myPointDirection = ((Math.random()*10)-10); 
        //holds current direction the ship is pointing in degrees    
   }
