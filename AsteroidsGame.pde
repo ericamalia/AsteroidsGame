@@ -44,6 +44,9 @@ public void keyTyped() {
   if (key == 'h'){
       bob.setX((int)(Math.random()*900));
       bob.setY((int)(Math.random()*900));
+       bob.setDirectionX(0);
+      bob.setDirectionY(0);
+      bob.rotate((int)(Math.random()*360));
   }
  else if (key == 'g'){
     bob.setDirectionX(0);
@@ -60,12 +63,14 @@ public void keyTyped() {
 public void keyPressed(){
   if (keyCode == RIGHT){
     bob.rotate(30);
-     bob.setDirectionX(2);
-     bob.setDirectionY(2);
+     bob.setDirectionX(1);
+     bob.setDirectionY(1);
 
  }
  else if (keyCode == LEFT){
     bob.rotate(-30);
+     bob.setDirectionX(1);
+     bob.setDirectionY(1);
   
 }
 }
