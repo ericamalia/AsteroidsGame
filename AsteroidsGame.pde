@@ -1,7 +1,8 @@
 
 Spaceship bob = new Spaceship();
 Stars[] sky = new Stars[400];
-Asteroid[] rock = new Asteroid[15];
+ArrayList <Asteroid> rocks = new ArrayList <Asteroid>();
+
 //your variable declarations here
 public void setup() 
 {
@@ -10,9 +11,10 @@ public void setup()
   {
     sky[i] = new Stars();
   }
-  for (int i=0; i< rock.length; i++){
-      rock[i] = new Asteroid();
+  for (int i=0; i< 20; i++){
+      rocks.add(new Asteroid());
    }
+
   //your code here
 }
 public void draw() 
@@ -22,15 +24,15 @@ public void draw()
      {
       sky[i].show();
      }
-     for (int i=0; i< rock.length; i++){
-        rock[i].show();
-        rock[i].move();
+     for (int i=0; i< rocks.size(); i++){
+        rocks.get(i).show();
+        rocks.get(i).move();
      }
     bob.show();
     bob.move();
 
-    for (int i=0; i<rock.length; i++){
-      if (dist(bob.getX(),bob.getY(), rock[i].getX(),rock[i].getY()) <= 10){
+    for (int i=0; i< rocks.size(); i++){
+      if (dist(bob.getX(),bob.getY(), rocks.get(i).getX(),rocks.get(i).getY()) <= 10){
         bob.setDirectionX(0);
         bob.setDirectionY(0);
         stroke(#AD70EF);
@@ -231,6 +233,7 @@ class Spaceship extends Floater
    public void lines ()
   {
     stroke(255);
+    rotate((int)myPointDirection);
     line((int)myCenterX, (int)(myCenterY+2), (int)(myCenterX-25), (int)(myCenterY+2));
     line((int)myCenterX, (int)(myCenterY-2), (int)(myCenterX-25), (int)(myCenterY-2));
     
