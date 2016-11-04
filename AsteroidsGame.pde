@@ -64,13 +64,13 @@ public void keyTyped() {
 }
 public void keyPressed(){
   if (keyCode == RIGHT){
-    bob.rotate(30);
+    bob.rotate(-30);
      bob.setDirectionX(1);
      bob.setDirectionY(1);
 
  }
  else if (keyCode == LEFT){
-    bob.rotate(-30);
+    bob.rotate(30);
      bob.setDirectionX(1);
      bob.setDirectionY(1);
   
@@ -106,8 +106,8 @@ class Asteroid extends Floater{
       myStroke =  #CFCFAD;    
       myCenterX = ((int)(Math.random()*900));
       myCenterY = ((int)(Math.random()*900)); 
-      myDirectionX = 0;
-      myDirectionY = 0; //holds x and y coordinates of the vector for direction of travel   
+      myDirectionX = 2;
+      myDirectionY = -2; //holds x and y coordinates of the vector for direction of travel   
       myPointDirection = ((Math.random()*10)-10); 
       spin = ((int)(Math.random()*9)-2);
   }
@@ -154,6 +154,7 @@ class Asteroid extends Floater{
     if (spin == 0){
       spin = 1;
     }
+    super.move();
   }
 }
 
