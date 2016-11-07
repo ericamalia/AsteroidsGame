@@ -36,11 +36,12 @@ public void draw()
 
     for (int i=0; i< rocks.size(); i++){
       if (dist(bob.getX(),bob.getY(), rocks.get(i).getX(),rocks.get(i).getY()) <= 10){
-        bob.setDirectionX(0);
-        bob.setDirectionY(0);
+        //bob.setDirectionX(0);
+        //bob.setDirectionY(0);
         stroke(#AD70EF);
         textSize(80);
         text("ow",323,325);
+        rocks.remove(i);
       }
   }
 }
@@ -79,21 +80,14 @@ public void keyPressed()
 {
   if (keyCode == RIGHT){
     bob.rotate(-30);
-     bob.setDirectionX(1);
-     bob.setDirectionY(1);
      light.rotate(-30);
-     light.setDirectionX(1);
-     light.setDirectionY(1);
+  
 
 
  }
  if (keyCode == LEFT){
     bob.rotate(30);
-     bob.setDirectionX(1);
-     bob.setDirectionY(1);
      light.rotate(30);
-     light.setDirectionX(1);
-     light.setDirectionY(1);
 
 }
 if (key == 'b'){
@@ -123,8 +117,8 @@ class Asteroid extends Floater{
    protected int spin;
   public Asteroid(){
       corners = 6;  //the number of corners, a triangular floater has 3
-      int[] allX = {-8,8,12,8,-8,-12};
-      int[] allY = {0,0,-8,-16,-16,-8};
+      int[] allX = {-12,-8,8,12,8,-8};
+      int[] allY = {0,8,8,0,-8,-8};
       xCorners  = allX;
       yCorners = allY;
       myColor = #CFCFAD;
@@ -196,8 +190,8 @@ class Outside extends Floater {
   public Outside()
   {
       corners = 3;  //the number of corners, a triangular floater has 3
-      int[] allX = {-81, -60, -80};
-      int[] allY = {0, 0, -40};
+      int[] allX = {-6, -30, -8};
+      int[] allY = {6, 0, -6};
       xCorners  = allX;
       yCorners = allY;
       myColor = #506BAA;
