@@ -3,9 +3,7 @@ Spaceship bob = new Spaceship();
 Outside light = new Outside();
 Stars[] sky = new Stars[400];
 ArrayList <Asteroid> rocks = new ArrayList <Asteroid>();
-int hyperX = ((int)(Math.random()*900));
-int hyperY = ((int)(Math.random()*900));
-int hyperR = ((int)(Math.random()*360));
+
 //your variable declarations here
 public void setup()
 {
@@ -48,13 +46,17 @@ public void draw()
 
 public void keyTyped() {
   if (key == 'h'){ //hyperspace
+    int hyperX = ((int)(Math.random()*750));
+    int hyperY = ((int)(Math.random()*750));
+    int hyperR = ((int)(Math.random()*360));
 
       bob.setX(hyperX);
       bob.setY(hyperY);
        bob.setDirectionX(0);
       bob.setDirectionY(0);
       bob.rotate(hyperR);
-       light.setX(hyperX);
+
+      light.setX(hyperX);
       light.setY(hyperY);
       light.setDirectionX(0);
       light.setDirectionY(0);
@@ -81,8 +83,6 @@ public void keyPressed()
   if (keyCode == RIGHT){
     bob.rotate(-30);
      light.rotate(-30);
-  
-
 
  }
  if (keyCode == LEFT){
