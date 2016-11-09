@@ -2,6 +2,8 @@
 Spaceship bob = new Spaceship();
 Outside light = new Outside();
 Stars[] sky = new Stars[400];
+
+ArrayList <Bullet> pow = new ArrayList <Bullet>();
 ArrayList <Asteroid> rocks = new ArrayList <Asteroid>();
 
 //your variable declarations here
@@ -40,8 +42,11 @@ public void draw()
         textSize(80);
         text("ow",323,325);
         rocks.remove(i);
+        i--; 
       }
   }
+
+  
 }
 
 public void keyTyped() {
@@ -81,18 +86,25 @@ if (key == 'g'){ //stop
 public void keyPressed()
 {
   if (keyCode == RIGHT){
-    bob.rotate(-30);
-     light.rotate(-30);
+    bob.rotate(30);
+     light.rotate(30);
 
  }
  if (keyCode == LEFT){
-    bob.rotate(30);
-     light.rotate(30);
+    bob.rotate(-30);
+     light.rotate(-30);
 
 }
 if (key == 'b'){
   bob.accelerate(1);
   light.accelerate(1);
+}
+if (keyCode == ' '){
+   for (int i=0; i< 20; i++){
+      pow.add(new Bullet(bob));
+      pow.get(i).show();
+   }
+
 }
 }
 
@@ -112,7 +124,64 @@ class Stars {
   }
 }
 
+class Bullet extends Floater {
+  double dRadians =myPointDirection*(Math.PI/180);
+  public Bullet(Spaceship theShip){
+    myColor = #FC5F05;
+    myStroke = #FC5F05;
+    myCenterX = 375;
+    myCenterY = 375;
+    myPointDirection = 0;
+    myDirectionX = 5 * Math.cos(dRadians) + myDirectionX;
+    myDirectionY = 5 * Math.sin(dRadians) + myDirectionY; 
+  }
+  public void setX(int x){
+      myCenterX = x;
+   }
+   public int getX(){
+    return (int)myCenterX;
+   }
+   public void setY(int y)
+   {
+      myCenterY = y;
+   }
+    public int getY(){
+      return (int)myCenterY;
+    }
+     public void setPointDirection(int dRadians)
+  {
+     myPointDirection = dRadians;
+  }
+  public double getPointDirection()
+  {
+    return (double)myPointDirection;
+  }
+   public void setDirectionX(double x){
+      myDirectionX = x;
+   }
+   public double getDirectionX(){
+      return (double)myDirectionX;
+   }
+   public void setDirectionY(double y)
+   {
+     myDirectionY = y;
+   }
+   public double getDirectionY()
+   {
+      return (double)myDirectionY;
+   }
 
+   public void show ()  //Draws circle bullets
+  {
+    fill(myColor);
+    stroke(myStroke);
+    //convert degrees to radians for sin and cos
+    ellipse( (float)myCenterX, (float)myCenterY, 7, 12);
+    
+   
+   
+  }
+}
 class Asteroid extends Floater{
    protected int spin;
   public Asteroid(){
