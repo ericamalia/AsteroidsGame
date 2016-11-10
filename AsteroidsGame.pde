@@ -103,6 +103,7 @@ if (keyCode == ' '){
    for (int i=0; i< 20; i++){
       pow.add(new Bullet(bob));
       pow.get(i).show();
+      pow.get(i).move();
    }
 
 }
@@ -176,7 +177,7 @@ class Bullet extends Floater {
     fill(myColor);
     stroke(myStroke);
     //convert degrees to radians for sin and cos
-    ellipse( (float)myCenterX, (float)myCenterY, 7, 12);
+    ellipse( (float)myCenterX, (float)myCenterY, 8, 12);
     
    
    
