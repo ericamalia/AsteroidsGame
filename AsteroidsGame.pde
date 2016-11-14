@@ -102,6 +102,9 @@ if (key == 'b'){
 if (keyCode == ' '){
    for (int i=0; i< 20; i++){
       pow.add(new Bullet(bob));
+      
+   }
+   for (int i=0; i< pow.size(); i++){
       pow.get(i).show();
       pow.get(i).move();
    }
@@ -130,9 +133,9 @@ class Bullet extends Floater {
   public Bullet(Spaceship theShip){
     myColor = #FC5F05;
     myStroke = #FC5F05;
-    myCenterX = 375;
-    myCenterY = 375;
-    myPointDirection = 0;
+    myCenterX = bob.myCenterX;
+    myCenterY = bob.myCenterY;
+    myPointDirection = bob.myPointDirection;
     myDirectionX = 5 * Math.cos(dRadians) + myDirectionX;
     myDirectionY = 5 * Math.sin(dRadians) + myDirectionY; 
   }
@@ -176,11 +179,31 @@ class Bullet extends Floater {
   {
     fill(myColor);
     stroke(myStroke);
-    //convert degrees to radians for sin and cos
-    ellipse( (float)myCenterX, (float)myCenterY, 8, 12);
-    
+    ellipse( (float)myCenterX, (float)myCenterY, 8, 8);
    
-   
+  }
+   public void move ()   //move the floater in the current direction of travel
+  {
+    //change the x and y coordinates by myDirectionX and myDirectionY
+    myCenterY += myDirectionY;
+
+    //wrap around screen
+    if(myCenterX >width)
+    {
+      myCenterX = 0;
+    }
+    else if (myCenterX<0)
+    {
+      myCenterX = width;
+    }
+    if(myCenterY >height)
+    {
+      myCenterY = 0;
+    }
+    else if (myCenterY < 0)
+    {
+      myCenterY = height;
+    }
   }
 }
 class Asteroid extends Floater{
