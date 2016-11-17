@@ -45,7 +45,11 @@ public void draw()
         i--; 
       }
   }
+   for (int i=0; i< pow.size(); i++){
+      pow.get(i).show();
+      pow.get(i).move();
 
+   }
   
 }
 
@@ -59,8 +63,9 @@ public void keyTyped() {
       bob.setY(hyperY);
        bob.setDirectionX(0);
       bob.setDirectionY(0);
-      bob.rotate(hyperR);
-
+     bob.rotate(hyperR);
+  
+       
       light.setX(hyperX);
       light.setY(hyperY);
       light.setDirectionX(0);
@@ -75,38 +80,38 @@ if (key == 'g'){ //stop
     light.setDirectionY(0);
   }
 
- if (key == 'b'){ //accelerate
-      //bob.myStroke = #00FFF5;
-      //bob.lines();
+ /*if (key == 'b'){ //accelerate
       light.show();
       light.move();
     
- }
+ }*/
 }
 public void keyPressed()
 {
   if (keyCode == RIGHT){
     bob.rotate(30);
      light.rotate(30);
+     for (int i=0; i< pow.size(); i++){
+        pow.get(i).rotate(30);
+   }
 
  }
  if (keyCode == LEFT){
     bob.rotate(-30);
      light.rotate(-30);
+     for (int i=0; i< pow.size(); i++){
+        pow.get(i).rotate(-30);
+   }
 
 }
 if (key == 'b'){
   bob.accelerate(1);
-  light.accelerate(1);
+  //light.accelerate(1);
 }
 if (keyCode == ' '){
    for (int i=0; i< 20; i++){
       pow.add(new Bullet(bob));
       
-   }
-   for (int i=0; i< pow.size(); i++){
-      pow.get(i).show();
-      pow.get(i).move();
    }
 
 }
@@ -133,11 +138,11 @@ class Bullet extends Floater {
   public Bullet(Spaceship theShip){
     myColor = #FC5F05;
     myStroke = #FC5F05;
-    myCenterX = bob.myCenterX;
-    myCenterY = bob.myCenterY;
-    myPointDirection = bob.myPointDirection;
-    myDirectionX = 5 * Math.cos(dRadians) + myDirectionX;
-    myDirectionY = 5 * Math.sin(dRadians) + myDirectionY; 
+    myCenterX = bob.getX();
+    myCenterY = bob.getY();
+    myPointDirection = bob.getPointDirection();
+    myDirectionX = 5 * Math.cos(dRadians) + bob.getDirectionX();
+    myDirectionY = 5 * Math.sin(dRadians) + bob.getDirectionY(); 
   }
   public void setX(int x){
       myCenterX = x;
@@ -179,32 +184,10 @@ class Bullet extends Floater {
   {
     fill(myColor);
     stroke(myStroke);
-    ellipse( (float)myCenterX, (float)myCenterY, 8, 8);
+    ellipse( (float)myCenterX, (float)myCenterY, 6, 6);
    
   }
-   public void move ()   //move the floater in the current direction of travel
-  {
-    //change the x and y coordinates by myDirectionX and myDirectionY
-    myCenterY += myDirectionY;
-
-    //wrap around screen
-    if(myCenterX >width)
-    {
-      myCenterX = 0;
-    }
-    else if (myCenterX<0)
-    {
-      myCenterX = width;
-    }
-    if(myCenterY >height)
-    {
-      myCenterY = 0;
-    }
-    else if (myCenterY < 0)
-    {
-      myCenterY = height;
-    }
-  }
+  
 }
 class Asteroid extends Floater{
    protected int spin;
