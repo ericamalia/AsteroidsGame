@@ -31,11 +31,12 @@ public void draw()
         rocks.get(i).show();
         rocks.get(i).move();
      }
-    bob.show();
-    bob.move();
+    
+     for (int j=0; j< pow.size(); j++){
+
 
     for (int i=0; i< rocks.size(); i++){
-      if (dist(bob.getX(),bob.getY(), rocks.get(i).getX(),rocks.get(i).getY()) <= 10){
+      if (dist(pow.get(j).getX(),pow.get(j).getY(), rocks.get(i).getX(),rocks.get(i).getY()) <= 4){
         //bob.setDirectionX(0);
         //bob.setDirectionY(0);
         stroke(#AD70EF);
@@ -45,11 +46,14 @@ public void draw()
         i--; 
       }
   }
+}
    for (int i=0; i< pow.size(); i++){
       pow.get(i).show();
       pow.get(i).move();
 
    }
+   bob.show();
+    bob.move();
   
 }
 
@@ -134,15 +138,16 @@ class Stars {
 }
 
 class Bullet extends Floater {
-  double dRadians =myPointDirection*(Math.PI/180);
+  
   public Bullet(Spaceship theShip){
     myColor = #FC5F05;
     myStroke = #FC5F05;
-    myCenterX = bob.getX();
-    myCenterY = bob.getY();
-    myPointDirection = bob.getPointDirection();
-    myDirectionX = 5 * Math.cos(dRadians) + bob.getDirectionX();
-    myDirectionY = 5 * Math.sin(dRadians) + bob.getDirectionY(); 
+    myCenterX = theShip.getX();
+    myCenterY = theShip.getY();
+    myPointDirection = theShip.getPointDirection();
+    double dRadians =myPointDirection*(Math.PI/180);
+    myDirectionX = 5 * Math.cos(dRadians) + theShip.getDirectionX();
+    myDirectionY = 5 * Math.sin(dRadians) + theShip.getDirectionY(); 
   }
   public void setX(int x){
       myCenterX = x;
@@ -187,7 +192,20 @@ class Bullet extends Floater {
     ellipse( (float)myCenterX, (float)myCenterY, 6, 6);
    
   }
-  
+   public void move ()   //move the floater in the current direction of travel
+  {
+    //change the x and y coordinates by myDirectionX and myDirectionY
+    myCenterX += myDirectionX;
+    myCenterY += myDirectionY;
+    if(myCenterX < 0)
+      pow.remove(this);
+    if(myCenterX > 750)
+      pow.remove(this);
+    if (myCenterY < 0)
+      pow.remove(this);  
+    if (myCenterY >750)
+     pow.remove(this);
+  }
 }
 class Asteroid extends Floater{
    protected int spin;
