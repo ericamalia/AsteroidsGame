@@ -32,26 +32,30 @@ public void draw()
         rocks.get(i).move();
      }
     
-     for (int j=0; j< pow.size(); j++){
-
-
-    for (int i=0; i< rocks.size(); i++){
-      if (dist(pow.get(j).getX(),pow.get(j).getY(), rocks.get(i).getX(),rocks.get(i).getY()) <= 4){
-        //bob.setDirectionX(0);
-        //bob.setDirectionY(0);
-        stroke(#AD70EF);
-        textSize(80);
-        text("ow",323,325);
-        rocks.remove(i);
-        i--; 
-      }
-  }
-}
-   for (int i=0; i< pow.size(); i++){
+    for (int i=0; i< pow.size(); i++){
       pow.get(i).show();
       pow.get(i).move();
 
    }
+   
+     for (int j=0; j< pow.size(); j++){
+
+
+    for (int i=0; i< rocks.size(); i++){
+      if (dist(pow.get(j).getX(),pow.get(j).getY(), rocks.get(i).getX(),rocks.get(i).getY()) <= 6){
+
+        stroke(#AD70EF);
+        textSize(80);
+        text("ow",323,325);
+        rocks.remove(i);
+        pow.remove(j);
+        i--; 
+        j--;
+        break; 
+      }
+  }
+}
+   
    bob.show();
     bob.move();
   
