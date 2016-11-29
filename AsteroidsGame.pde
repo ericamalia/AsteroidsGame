@@ -47,10 +47,12 @@ public void draw()
         stroke(#AD70EF);
         textSize(80);
         text("ow",323,325);
-        rocks.remove(i);
+       
         pow.remove(j);
-        i--; 
         j--;
+        rocks.remove(i);
+        i--; 
+        
         break; 
       }
   }
