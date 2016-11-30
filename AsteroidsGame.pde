@@ -6,6 +6,9 @@ Stars[] sky = new Stars[400];
 ArrayList <Bullet> pow = new ArrayList <Bullet>();
 ArrayList <Asteroid> rocks = new ArrayList <Asteroid>();
 
+ int points = 0;
+ int lives = 3;
+ PImage b;
 //your variable declarations here
 public void setup()
 {
@@ -17,11 +20,12 @@ public void setup()
   for (int i=0; i< 20; i++){
       rocks.add(new Asteroid());
    }
-
+   b = loadImage("heart.png");
   //your code here
 }
 public void draw()
 {
+
     background(0);
      for (int i= 0; i < sky.length; i++)
      {
@@ -47,19 +51,45 @@ public void draw()
         stroke(#AD70EF);
         textSize(80);
         text("ow",323,325);
-       
         pow.remove(j);
         j--;
+
         rocks.remove(i);
         i--; 
         
+        points++;
         break; 
+
       }
   }
 }
+
+
+
+
+    for (int i=0; i< rocks.size(); i++){
+      if (dist(bob.getX(), bob.getY(), rocks.get(i).getX(),rocks.get(i).getY()) <= 20){
+
+       lives--; 
+       /*if (lives <= 0){
+          text( "GAME OVER", 375,375);
+
+       }*/
+
+      }
+  }
+
    
    bob.show();
     bob.move();
+    
+    fill(185, 150, 34);
+    textSize(20);
+    text("Points: " + points ,650, 60);
+
+    text("Lives: " , 660, 100 ); 
+    image(b, 670, 110, 30,30 );
+    text("x"+ lives, 700, 130);
   
 }
 
@@ -119,10 +149,9 @@ if (key == 'b'){
   //light.accelerate(1);
 }
 if (keyCode == ' '){
-   for (int i=0; i< 20; i++){
+   
       pow.add(new Bullet(bob));
-      
-   }
+    
 
 }
 }
