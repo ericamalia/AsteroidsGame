@@ -7,8 +7,11 @@ ArrayList <Bullet> pow = new ArrayList <Bullet>();
 ArrayList <Asteroid> rocks = new ArrayList <Asteroid>();
 
  int points = 0;
- int lives = 3;
+ int lives = 5;
  PImage b;
+
+  boolean check = true;
+    int countDown = 0;
 //your variable declarations here
 public void setup()
 {
@@ -65,17 +68,24 @@ public void draw()
 }
 
 
-
-
+   
     for (int i=0; i< rocks.size(); i++){
-      if (dist(bob.getX(), bob.getY(), rocks.get(i).getX(),rocks.get(i).getY()) <= 20){
+      if (dist(bob.getX(), bob.getY(), rocks.get(i).getX(),rocks.get(i).getY()) <= 20 && check == true){
 
        lives--; 
+       check = false; 
+       countDown = 360; 
        /*if (lives <= 0){
           text( "GAME OVER", 375,375);
 
        }*/
+      }
 
+      if (countDown > 0){
+        countDown--; 
+      }
+      else{
+        check = true; 
       }
   }
 
@@ -90,6 +100,10 @@ public void draw()
     text("Lives: " , 660, 100 ); 
     image(b, 670, 110, 30,30 );
     text("x"+ lives, 700, 130);
+
+    if (pow.size() == 0){
+      System.out.println ("hi");
+    }
   
 }
 
