@@ -11,7 +11,7 @@ ArrayList <Asteroid> rocks = new ArrayList <Asteroid>();
  PImage b;
 
   boolean check = true;
-    int countDown = 0;
+  int countDown = 0;
 //your variable declarations here
 public void setup()
 {
@@ -65,8 +65,8 @@ public void draw()
         break; 
 
       }
+    }
   }
-}
 
 
    
@@ -102,9 +102,9 @@ public void draw()
     image(b, 670, 110, 30,30 );
     text("x"+ lives, 700, 130);
 
-    if (pow.size() == 0){
+    /*if (pow.size() == 0){
       System.out.println ("hi");
-    }
+    }*/
   
 }
 
