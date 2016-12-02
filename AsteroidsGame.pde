@@ -114,7 +114,7 @@ public void draw()
       }
     }
 
-    if (lives <= 0){
+    /*if (lives <= 0){
      
       text(" GAME OVER :(", 320, 350);
       text("press R to restart.", 320, 390);
@@ -125,7 +125,7 @@ public void draw()
         
       
       }
-    }
+    }*/
 }
 
 public void keyTyped() {
