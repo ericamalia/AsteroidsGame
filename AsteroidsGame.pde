@@ -16,6 +16,7 @@ ArrayList <Asteroid> rocks = new ArrayList <Asteroid>();
 public void setup()
 {
   size(750,750);
+  b = loadImage("heart.png");
   for (int i= 0; i < sky.length; i++)
   {
     sky[i] = new Stars();
@@ -23,7 +24,7 @@ public void setup()
   for (int i=0; i< 20; i++){
       rocks.add(new Asteroid());
    }
-   b = loadImage("heart.png");
+   
   //your code here
 }
 public void draw()
