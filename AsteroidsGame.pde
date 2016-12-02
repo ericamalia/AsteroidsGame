@@ -102,10 +102,30 @@ public void draw()
     image(b, 670, 110, 30,30 );
     text("x"+ lives, 700, 130);
 
-    /*if (pow.size() == 0){
-      System.out.println ("hi");
-    }*/
-  
+    if (points == 20){
+      text("YOU SAVED US!", 320, 350);
+       text("press R to restart.", 320, 390);
+      if (key == 'r'){
+        points = 0;
+        lives = 5;
+        for (int i=0; i< 20; i++){
+          rocks.add(new Asteroid());
+       }
+      }
+    }
+
+    if (lives <= 0){
+     
+      text(" GAME OVER :(", 320, 350);
+      text("press R to restart.", 320, 390);
+      
+         if (key == 'r'){
+        points = 0;
+        lives = 5;
+        
+      
+      }
+    }
 }
 
 public void keyTyped() {
